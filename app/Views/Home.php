@@ -28,7 +28,7 @@ if (session()->getFlashData('alert')) {
                 <td> <?= $dp['id']; ?> </td>
                 <td> <?= $dp['nama_produk']; ?> </td>
                 <td> <?= $dp['stock']; ?> </td>
-                <td> <?= $dp['harga_produk']; ?> </td>
+                <td> Rp <?= number_format($dp['harga_produk'], 2, ',', '.'); ?> </td>
                 <td>
                     <button class="btn btn-warning btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#edit<?= $dp['id']; ?>">Edit</button>
 
