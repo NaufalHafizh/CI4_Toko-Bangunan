@@ -13,6 +13,7 @@ class Home extends BaseController
 
     {
         $this->modelProduk = new Produk();
+        $this->session = session();
     }
 
 
