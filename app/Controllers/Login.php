@@ -19,10 +19,13 @@ class Login extends BaseController
     {
         # code...
 
+
         $data = [
 
-            'title' => "Toko Bangunan | Login"
+            'title' => "Toko Bangunan | Login",
         ];
+
+        helper(['form']);
 
         return view('v_login', $data);
     }
@@ -34,10 +37,10 @@ class Login extends BaseController
         $this->validation->run($data, 'login');
         $errors = $this->validation->getErrors();
 
-        // if ($errors) {
-        //     session()->setFlashdata('error', $errors);
-        //     return redirect()->to('/');
-        // }
+        if ($errors) {
+            session()->setFlashdata('error', $errors);
+            return redirect()->to('/')->withInput();
+        }
 
         $User = $this->User->where('username', $data['username'])->first();
 
@@ -57,7 +60,7 @@ class Login extends BaseController
             } else {
 
                 session()->setFlashdata('msg', 'Password Salah');
-                return redirect()->to('/');
+                return redirect()->to('/')->withInput();
             }
         } else {
 
