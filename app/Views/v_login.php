@@ -17,15 +17,28 @@
                         <h3 class="fw-bolder">LOGIN</h3>
                         <hr>
                         <?php if (session()->getFlashdata('msg')) : ?>
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissible fade show">
                                 <?= session()->getFlashdata('msg') ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
+                        <?php
+                        if (session()->getFlashData('error')) {
+                        ?>
+                            <?php
+                            foreach (session()->getFlashData('error') as $error) {
+                            ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <p><?= $error ?></p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php  } ?>
+                        <?php } ?>
                         <form action="/login/loginAuth" method="POST">
                             <?= csrf_field() ?>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Username</label>
-                                <input type="text" class="form-control" name="username">
+                                <input type="text" class="form-control" name="username" value="<?= old('username') ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
