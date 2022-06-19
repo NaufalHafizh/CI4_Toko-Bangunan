@@ -41,4 +41,22 @@ class Validation extends BaseConfig
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+
+    public $login = [
+
+        'username' => 'required',
+        'password' => 'required|min_length[10]'
+    ];
+
+    public $error_login = [
+
+        'username' => [
+            'required' => 'Field Tidak Boleh Kosong',
+        ],
+
+        'password' => [
+
+            'required' => 'Field Tidak Boleh Kosong',
+        ],
+    ];
 }
