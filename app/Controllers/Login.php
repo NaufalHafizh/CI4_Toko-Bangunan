@@ -31,6 +31,14 @@ class Login extends BaseController
     {
         $data = $this->request->getVar();
 
+        $this->validation->run($data, 'login');
+        $errors = $this->validation->getErrors();
+
+        // if ($errors) {
+        //     session()->setFlashdata('error', $errors);
+        //     return redirect()->to('/');
+        // }
+
         $User = $this->User->where('username', $data['username'])->first();
 
         if ($User) {
@@ -45,16 +53,16 @@ class Login extends BaseController
                 ];
 
                 $this->session->set($loginSession);
-                return redirect('Home');
+                return redirect()->to('Home');
             } else {
 
                 session()->setFlashdata('msg', 'Password Salah');
-                return redirect('/');
+                return redirect()->to('/');
             }
         } else {
 
             session()->setFlashdata('msg', 'Username Tidak Terdaftar');
-            return redirect('/');
+            return redirect()->to('/');
         }
     }
 
